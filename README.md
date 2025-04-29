@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/logo.png" alt="BeOrganized Logo" width="200"/>
+</p>
+
+
 # BeOrganized - Java Swing + Spring Boot
 
 📅✅ **BeOrganized** is a desktop application for managing tasks, calendar scheduling, task notes, and productivity tracking.  
