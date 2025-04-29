@@ -533,10 +533,13 @@ public class TaskCalendarPage {
         gbc.gridy = 1;
         taskPanelItem.add(new JLabel("Date: " + task.getDate()), gbc);
 
+        
         // Task Category
         gbc.gridy = 2;
-        JLabel categoryLabel = new JLabel("Category: " + task.getCategory());
-        categoryLabel.setOpaque(true);
+        JPanel categoryPanel = new JPanel();
+        categoryPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        categoryPanel.setOpaque(false); // Transparent panel
+
         Color bgColor = switch (task.getCategory()) {
             case "Holiday"  -> COLOR_HOLIDAY;
             case "Meeting"  -> COLOR_MEETING;
@@ -544,11 +547,15 @@ public class TaskCalendarPage {
             case "Personal" -> COLOR_PERSONAL;
             default         -> COLOR_GENERAL;
         };
-        categoryLabel.setBackground(bgColor);
+
+        RoundedLabel categoryLabel = new RoundedLabel("Category: " + task.getCategory(), bgColor);
         categoryLabel.setForeground(Color.BLACK);
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        categoryLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        taskPanelItem.add(categoryLabel, gbc);
+        categoryLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding inside
+
+        categoryPanel.add(categoryLabel);
+        taskPanelItem.add(categoryPanel, gbc);
+
 
         // Task Description
         gbc.gridy = 3;
@@ -955,6 +962,30 @@ public class TaskCalendarPage {
             e.printStackTrace();
         }
         return "";
+    }
+
+    // --- Rounded background label for category ---
+    class RoundedLabel extends JLabel {
+        private final Color backgroundColor;
+        private final int arcWidth;
+        private final int arcHeight;
+
+        public RoundedLabel(String text, Color backgroundColor) {
+            super(text);
+            this.backgroundColor = backgroundColor;
+            this.arcWidth = 20;   // How round (width)
+            this.arcHeight = 20;  // How round (height)
+            setOpaque(false);     // We handle background manually
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            g2d.setColor(backgroundColor);
+            g2d.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
+            super.paintComponent(g2d);
+            g2d.dispose();
+        }
     }
 
     // --- Navigate to HomePage ---
