@@ -39,8 +39,8 @@ Built with **Java Swing** for the frontend and **Spring Boot** for the backend.
 </p>
 <p align="center">
   <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/homePage.png" width="45%"/>
-  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Clendar.png" width="45%"/>
-</p>
+
+  </p>
 <p align="center">
   <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Alltasks.png" width="45%"/>
   <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Statistics.png"width="45%"/>
