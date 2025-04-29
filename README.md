@@ -5,12 +5,13 @@
 
 # BeOrganized - Java Swing + Spring Boot
 
-📅✅ **BeOrganized** is a desktop application for managing tasks, calendar scheduling, task notes, and productivity tracking.  
+ **BeOrganized** is a desktop application for managing tasks, calendar scheduling, task notes, and productivity tracking.  
 Built with **Java Swing** for the frontend and **Spring Boot** for the backend.
 
 ---
 
 ## 🚀 Features
+- 🔒**User Authentication & Login System**: Secure login and user management
 - 📅 **Calendar View**: View and manage tasks with an interactive calendar
 - ✅ **Task Management**: Add, update, and delete tasks
 - 📈 **Statistics Dashboard**: Monitor task completion and category distribution
@@ -32,3 +33,21 @@ Built with **Java Swing** for the frontend and **Spring Boot** for the backend.
 ---
 
 ## 📷 Screenshots
+<p align="center">
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Login.png" width="45%"/>
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Registeration.png" width="45%"/>
+</p>
+<p align="center">
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/homePage.png" width="45%"/>
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Clendar.png" width="45%"/>
+</p>
+<p align="center">
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Alltasks.png" width="45%"/>
+  <img src="https://github.com/ruofio/CalendarTaskManager-JavaSwing-SpringBoot/blob/main/RuofFrontendJW/src/main/resources/Statistics.png"width="45%"/>
+</p>
+
+---
+ ## 📦 Installation & Run
+ 1. **Ensure the database is running and accessible.**
+ 2. Open the `RuofProjectBackendApplication` Java file and run it to start the backend server.
+ 3. Then, navigate to the frontend project directory `RuofFrontendJW` and run the `main` class to launch the UI.
