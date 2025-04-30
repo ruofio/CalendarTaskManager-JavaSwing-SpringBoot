@@ -269,9 +269,26 @@ public class HomePage {
         quotePanel.setBackground(new Color(255, 255, 255, 180));
         quotePanel.setBorder(BorderFactory.createLineBorder(new Color(33, 150, 243), 2, true));
 
-        JSONObject quoteData = fetchDailyQuote();
-        String quoteText = quoteData.optString("q", "Stay positive and keep moving forward.");
-        String quoteAuthor = quoteData.optString("a", "Unknown");
+        JSONObject quoteData = new JSONObject();
+        String quoteText = "";
+        String quoteAuthor = "";
+
+        int maxAttempts = 5; // limit to avoid infinite loop
+        for (int i = 0; i < maxAttempts; i++) {
+            quoteData = fetchDailyQuote();
+            quoteText = quoteData.optString("q", "");
+            quoteAuthor = quoteData.optString("a", "Unknown");
+
+            if (quoteText.length() > 0 && quoteText.length() <= 80) {
+                break; // short quote found
+            }
+        }
+
+        // Fallback if no short quote was found
+        if (quoteText.isEmpty() || quoteText.length() > 150) {
+            quoteText = "Stay positive and keep moving forward.";
+            quoteAuthor = "Unknown";
+        }
 
         JLabel quoteLabel = new JLabel("<html><div style='text-align: center; max-width: 300px;'>" + quoteText + "</div></html>");
         quoteLabel.setFont(new Font("Serif", Font.ITALIC, 20));
