@@ -269,26 +269,31 @@ public class HomePage {
         quotePanel.setBackground(new Color(255, 255, 255, 180));
         quotePanel.setBorder(BorderFactory.createLineBorder(new Color(33, 150, 243), 2, true));
 
-        JSONObject quoteData = new JSONObject();
+        JSONObject quoteData;
         String quoteText = "";
         String quoteAuthor = "";
 
-        int maxAttempts = 5; // limit to avoid infinite loop
+        int maxAttempts = 5; // avoid infinite loops
+        boolean gotRealQuote = false;
+
         for (int i = 0; i < maxAttempts; i++) {
             quoteData = fetchDailyQuote();
             quoteText = quoteData.optString("q", "");
             quoteAuthor = quoteData.optString("a", "Unknown");
 
-            if (quoteText.length() > 0 && quoteText.length() <= 80) {
-                break; // short quote found
+            if (!quoteText.equalsIgnoreCase("Stay positive and keep moving forward.")
+                    && quoteText.length() > 0 && quoteText.length() <= 80) {
+                gotRealQuote = true;
+                break;
             }
         }
 
-        // Fallback if no short quote was found
-        if (quoteText.isEmpty() || quoteText.length() > 150) {
-            quoteText = "Stay positive and keep moving forward.";
-            quoteAuthor = "Unknown";
+        // Use fallback only if all attempts fail
+        if (!gotRealQuote) {
+            quoteText = "“Your limitation—it’s only your imagination.”";
+            quoteAuthor = "Motivational Quote Bot";
         }
+
 
         JLabel quoteLabel = new JLabel("<html><div style='text-align: center; max-width: 300px;'>" + quoteText + "</div></html>");
         quoteLabel.setFont(new Font("Serif", Font.ITALIC, 20));
@@ -478,22 +483,36 @@ public class HomePage {
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder responseBuilder = new StringBuilder();
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                responseBuilder.append(inputLine);
-            }
-            in.close();
+            int responseCode = connection.getResponseCode();
 
-            JSONArray jsonArray = new JSONArray(responseBuilder.toString());
-            return jsonArray.getJSONObject(0);
+            if (responseCode == 200) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder responseBuilder = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    responseBuilder.append(inputLine);
+                }
+                in.close();
+
+                JSONArray jsonArray = new JSONArray(responseBuilder.toString());
+                return jsonArray.getJSONObject(0);
+            } else {
+                System.err.println("Quote API error: HTTP " + responseCode);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new JSONObject();
+
+        // fallback quote returned ONLY during this session (never cached)
+        JSONObject fallback = new JSONObject();
+        fallback.put("q", "Stay positive and keep moving forward.");
+        fallback.put("a", "Unknown");
+        return fallback;
     }
+
+
+
 
 
 }
