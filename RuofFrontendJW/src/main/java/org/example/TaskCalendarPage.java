@@ -507,7 +507,11 @@ public class TaskCalendarPage {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+
 
         // Task Name
         gbc.gridx = 0;
@@ -533,7 +537,7 @@ public class TaskCalendarPage {
         gbc.gridy = 1;
         taskPanelItem.add(new JLabel("Date: " + task.getDate()), gbc);
 
-        
+
         // Task Category
         gbc.gridy = 2;
         JPanel categoryPanel = new JPanel();
