@@ -27,7 +27,7 @@ Built with **Java Swing** for the frontend and **Spring Boot** for the backend.
 - Java Swing (Desktop User Interface)
 - Spring Boot (RESTful API Backend)
 - JCalendar (Calendar Component)
-- MySQL / H2 Database (for storing tasks)
+- PostgreSQL Database (for storing tasks)
 - Maven (Project build tool)
 
 ---
